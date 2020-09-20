@@ -208,7 +208,7 @@ function evaluate(x::AbstractArray{Float64,1}, C::FTCoeff)
         error("Dimension of input and FT coefficients don't match")
     end
 
-    if any(x .<= -1.0) || any(x .>= 1.0)
+    if any(x .< -1.0) || any(x .> 1.0)
         error("Input components must be in the interval [-1, 1]")
     end
 
@@ -247,7 +247,7 @@ function gradient(x::AbstractArray{Float64,1}, C::FTCoeff)
         error("Dimension of input and FT coefficients don't match")
     end
 
-    if any(x .<= -1.0) || any(x .>= 1.0)
+    if any(x .< -1.0) || any(x .> 1.0)
         error("Input components must be in the interval [-1, 1]")
     end
 
