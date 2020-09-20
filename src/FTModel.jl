@@ -5,7 +5,7 @@ using LinearAlgebra
 using Distributions
 using Jacobi
 
-import Base.show, Base.+, Base.-, Base.*, Base.zero, Base.rand, Base.sign
+import Base.show, Base.+, Base.-, Base.*, Base./, Base.zero, Base.rand, Base.sign
 
 export FTCoeff, sumfuncoeffs, evaluate, gradient
 
@@ -109,9 +109,17 @@ function (-)(C1::FTCoeff, C2::FTCoeff)
     return C1 + (-C2)
 end
 
-function (*)(α::Real, C::FTCoeff)
+function (*)(α::Float64, C::FTCoeff)
     return FTCoeff(C.ndim, C.rank, C.nbasis,
                    [α * C.coeffs[d] for d in 1:C.ndim])
+end
+
+function (*)(C::FTCoeff, α::Float64)
+    return α * C
+end
+
+function (/)(C::FTCoeff, α::Float64)
+    return C * (1.0 / α)
 end
 
 function zero(::Type{FTCoeff}, ndim::Int, rank::Array{Int,1},
